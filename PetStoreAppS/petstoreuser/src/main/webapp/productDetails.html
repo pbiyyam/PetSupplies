@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link href="css/style.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+<h3>You are in Products Display Page</h3>
+<h4>
+<div class="container" align="center" ng-init="fetchProducts()">
+	<!-- <label >Categories</label>
+	<select name="Categories" id="Categories">
+		<option value="-1">-Select Category-</option>
+		<option ng-repeat="c in categories" value="{{c.categoryId}}" >{{c.categoryName}}</option>
+	</select>
+	<br> -->
+	<br>
+
+	<br>
+	<div class="alert alert-info" ng-show="products.length == 0">No Products found</div>
+	<br>
+<table class="table table-bordered table-striped" ng-show="products.length > 0">
+	<thead>
+		<tr>
+			<th style="text-align: center; width: 25px;">Id</th>
+ 			<th style="text-align: center;">Product Name</th>
+			<th style="text-align: center;">Product Description</th>
+			<th style="text-align: center;">Product Price</th>
+			<th style="text-align: center;">Product Status</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="item in products">
+			<td style="text-align: center;">{{item.productId}}</td>
+			<td>{{item.productName}}</td>
+			<td>{{item.productDesc}}</td>				
+			<td>{{item.productPrice}}</td>
+			<td>{{item.productStatus}}</td>
+		</tr>
+	</tbody>
+</table>
+
+
+</div>	
+</h4>
+<div>
+</div>
+</body>
+</html>

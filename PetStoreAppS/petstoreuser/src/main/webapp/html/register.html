@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Registration Page</title>
+<link href="css/style.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+	<div class="container">
+		<div align="center">
+			<h3>PetStore Registration Page!</h3>
+		</div>
+		<br>
+		<form name="rgnForm">
+			<h4>{{message}}</h4>
+			<br>
+			<div class="lt lgnlables">
+				<label class="lablename lt">Email:*</label><input class="lt fmt"
+					type="email" ng-model="emailId" name="uEmail" autofocus="" required
+					placeholder="Email">
+				<div class="lt nameError"
+					ng-show="rgnForm.$submitted || rgnForm.uEmail.$touched">
+					<font color="red"><span
+						ng-show="rgnForm.uEmail.$error.required">Please enter
+							email.</span> <span ng-show="rgnForm.uEmail.$error.email">Please
+							enter a valid email.</span></font>
+				</div>
+			</div>
+			<br />
+			<div class="lt lgnlables">
+				<label class="lablename lt">Password:*</label> <input class="lt fmt"
+					type="password" ng-model="password" name="password" required
+					placeholder="Password">
+				<div class="lt nameError"
+					ng-show="rgnForm.$submitted || rgnForm.password.$touched">
+					<font color="red"><span
+						ng-show="rgnForm.password.$error.required">Please enter
+							password.</span></font>
+				</div>
+			</div>
+			<br />
+			<div class="lt lgnlables">
+				<label class="lablename lt">Firstname:*</label> <input
+					class="lt fmt" type="text" ng-model="firstName" name="fname"
+					required placeholder="Firstname">
+				<div class="lt nameError"
+					ng-show="rgnForm.$submitted || rgnForm.fname.$touched">
+					<font color="red"><span
+						ng-show="rgnForm.fname.$error.required">Please enter
+							firstname.</span></font>
+				</div>
+			</div>
+			<br />
+			<div class="lt lgnlables">
+				<label class="lablename lt">Lastname:*</label> <input class="lt fmt"
+					type="text" ng-model="lastName" name="lname" required
+					placeholder="Lastname">
+				<div class="lt nameError"
+					ng-show="rgnForm.$submitted || rgnForm.lname.$touched">
+					<font color="red"><span
+						ng-show="rgnForm.lname.$error.required">Please enter
+							lastname.</span></font>
+				</div>
+			</div>
+			<br />
+			<div class="lt lgnlables">
+				<label class="lablename lt">Address:*</label> <input class="lt fmt"
+					type="text" ng-model="userAddress" name="address" required
+					placeholder="Address">
+				<div class="lt nameError"
+					ng-show="rgnForm.$submitted || rgnForm.address.$touched">
+					<font color="red"><span
+						ng-show="rgnForm.address.$error.required">Please enter
+							address.</span></font>
+				</div>
+			</div>
+			<br />
+			<div class="lt lgnlables">
+				<label class="lablename lt">Phone:*</label> <input class="lt fmt"
+					type="text" ng-model="contactNum" name="phone" ng-maxlength=12
+					required placeholder="Phone number">
+				<div class="lt nameError"
+					ng-show="rgnForm.$submitted || rgnForm.phone.$touched">
+					<font color="red"><span
+						ng-show="rgnForm.phone.$error.required">Please enter phone
+							number.</span> <span ng-show="rgnForm.phone.$error.number">Allows
+							only numbers.</span> <span ng-show="rgnForm.phone.$error.maxlength">Please
+							enter a valid phone number.</span></font>
+				</div>
+			</div>
+			<br />
+			<div>
+				<button class="sbmtbtn" ng-click="register()"
+					ng-disabled="rgnForm.$invalid">Sign Up</button>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

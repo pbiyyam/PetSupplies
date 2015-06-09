@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+        http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+        http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+        
+       <!--  <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean"> 
+			<property name="jndiName" value="java:jboss/datasources/ExampleDS"></property> 
+		</bean>  --> 
+      
+	 <!-- <bean id="dataSource" class="org.h2.jdbcx.JdbcConnectionPool">
+		<constructor-arg>
+			<bean class="org.h2.jdbcx.JdbcDataSource">
+				<property name="driver" value="org.h2.Driver" />
+				<property name="url" value="jdbc\:h2\:tcp\://localhost/~/test;DB_CLOSE_DELAY=-1" />
+				<property name="user" value="sa" />
+				<property name="password" value="sa" />
+			</bean>
+		</constructor-arg>
+	</bean> -->
+	
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="org.h2.Driver" />
+		<property name="url" value="jdbc:h2:tcp://localhost/~/H2Database\petstore" />
+		<property name="username" value="sa" />
+		<property name="password" value="sa" />
+	</bean>
+		
+		<!-- ************ JPA configuration *********** -->
+		
+		<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+	  <!-- <property name="persistenceXmlLocation" value="resources/persistence-demo.xml" />
+	  <property name="persistenceUnitName" value="PrimaryPersistenceUnit" /> -->
+	  <property name="dataSource" ref="dataSource" />        
+      <property name="packagesToScan" value="com.petstore.web.beans" />
+      <property name="jpaVendorAdapter">
+         <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+      </property>
+      <property name="jpaProperties">
+         <props>
+         	<prop key="showSql">true</prop>
+            <prop key="hibernate.hbm2ddl.auto">update/validate</prop>
+            <prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
+            <!-- <prop key="hibernate.transaction.factory_class">org.hibernate.transaction.JTATransactionFactory
+            </prop>
+            <prop key="hibernate.transaction.manager_lookup_class">org.hibernate.transaction.JBossTransactionManagerLookup
+            </prop> -->
+         </props>
+      </property>
+   </bean>
+
+	
+	 
+	 <!-- Transaction Manager -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory">
+			<ref bean="entityManagerFactory" />
+		</property>
+	</bean>
+	
+	<tx:annotation-driven transaction-manager="transactionManager" /> 
+
+ 
+   <bean id="persistenceExceptionTranslationPostProcessor"
+      class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+
+</beans>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link href="css/style.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+<h3>Hi!! Welcome to Products Management</h3>
+<div class="alert alert-error" ng-show="error">
+    {{errorMessage}}
+</div>
+<div class="container" align="center" ng-init="fetchAllCategories()">
+<div align="right"><a href="#/home">Home</a></div>
+
+<label >Categories</label>
+	<select name="Categories" id="Categories" ng-model="product.category.categoryId">
+		<option value="-1">-Select Category-</option>
+		<option ng-repeat="c in categories" value="{{c.categoryId}}" >{{c.categoryName}}</option>
+	</select>
+	<br>
+	<br>
+	<div class="control-group">
+        <div class="controls">
+            Product Name* <input type="text" ng-model="product.productName" placeholder="Product Name" required min="2">
+        </div>
+    </div>        
+     <br>
+     <div class="control-group">
+     	<div class="controls">
+     		 Product Price* <input type="text" ng-model="product.productPrice" placeholder="Product Price" required min="2"><br>
+     	</div>
+     </div>
+     <br>  
+     <div class="control-group">
+     	<div class="controls">
+     		Description* <input type="text" ng-model="product.productDesc" placeholder="Description" required min="2"><br>
+     	</div>
+     </div>
+     <br>  
+     <div class="control-group">
+     	<div class="controls">
+     		Product Status* <select name="productStatus" ng-model="product.productStatus">
+     			<option value="In Stock" >In Stock</option>
+     			<option value="Out of Stock" >Out of Stock</option>
+     		</select><br>
+     	</div>
+     </div>
+    <br>
+	<div class="control-group">
+        <div class="controls">
+            <button type="button" class="btn btn-primary" ng-disabled="!product.productName " ng-hide="editMode" ng-click="addNewProduct(product)">Add Product</button>
+            <button type="button" class="btn btn-primary" ng-disabled="!product.productName " ng-show="editMode" ng-click="updateProduct(product)">Save Product</button>
+            <button type="button" class="btn" ng-click="resetProductForm()">Reset</button>
+        </div>
+    </div>
+<br>
+	<div class="alert alert-info" ng-show="products.length == 0">No Products found</div>
+	<br>
+<table class="table table-bordered table-striped" ng-show="products.length > 0">
+	<thead>
+		<tr>
+			<th style="text-align: center; width: 25px;">Id</th>
+ 			<th style="text-align: center;">Product Name</th>
+			<th style="text-align: center;">Product Description</th>
+			<th style="text-align: center;">Product Price</th>
+			<th style="text-align: center;">Product Status</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="p in products" >
+			<td style="text-align: center;">{{p.productId}}</td>
+			<td>{{p.productName}}</td>
+			<td>{{p.productDesc}}</td>				
+			<td>{{p.productPrice}}</td>
+			<td>{{p.productStatus}}</td>
+			<td text-align: center;">
+                <button class="btn btn-danger" ng-click="removeProduct(p)">Remove</button>
+                <button class="btn btn-success" ng-click="editProduct(p)">Edit</button>
+            </td>
+		</tr>
+	</tbody>
+</table>
+</div>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet" href="css/app.css"/>
+</head>
+<body>
+<h3>Hi!! Welcome to Category Management</h3>
+<div class="alert alert-error" ng-show="error">
+    {{errorMessage}}
+</div>
+	<div class="container" align="center" ng-init="fetchCategories()">
+	<div align="right"><a href="#/home">Home</a></div>
+    <div class="control-group">
+        <div class="controls">
+            Category Name <input type="text" id="inputEmail" ng-model="category.categoryName" placeholder="Category Name" required min="2">
+        </div>
+    </div>
+    <br>
+    <div class="control-group">
+        <!-- <label class="control-label" for="inputEmail">Speed</label> -->
+        <div class="controls">
+            Description <input class="span3" type="text" id="inputSpeed" ng-model="category.categoryDesc" placeholder="Description" required min="1">
+            <!-- <span class="add-on">km/h</span> -->
+        </div>
+    </div>
+    <br>
+    <div class="control-group">
+        <div class="controls">
+            <button type="button" class="btn btn-primary" ng-disabled="!category.categoryName || !category.categoryDesc" ng-hide="editMode" ng-click="addNewCategory(category)">Add category</button>
+            <button type="button" class="btn btn-primary" ng-disabled="!category.categoryName || !category.categoryDesc" ng-show="editMode" ng-click="updateCategory(category)">Save category</button>
+            <button type="button" class="btn" ng-click="resetCategoryForm()">Reset</button>
+        </div>
+    </div>
+<br>
+<h3>Categories List</h3>
+<div class="alert alert-info" ng-show="categories.length == 0">
+    No Categories found
+</div>
+<table class="table table-bordered table-striped" ng-show="categories.length > 0">
+    <thead>
+        <tr>
+            <th style="text-align: center; width: 25px;">CategoryId</th>
+            <th style="text-align: center;">CategoryName</th>
+            <th style="text-align: center;">CategoryDesc</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="c in categories | orderBy:predicate">
+            <td style="text-align: center;">{{c.categoryId}}</td>
+            <td width:25px >{{c.categoryName}}</td>
+            <td width:25px>{{c.categoryDesc}}</td>
+            <td style="width:50px;text-align: center;">
+                <button class="btn btn-danger" ng-click="removeCategory(c)">Remove</button>
+                <button class="btn btn-success" ng-click="editCategory(c)">Edit</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<!-- <button class="btn btn-danger" ng-show="categories.length > 1" ng-click="removeAllCategories()">Remove All Categories</button> -->
+</div>
+</body>
+</html>	

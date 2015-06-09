@@ -1,0 +1,107 @@
+@CHARSET "ISO-8859-1";
+.lt{
+	float:left
+}
+div.footer p{
+	font-size: 14px;
+	text-align: -webkit-right;
+	margin-right: 930px;
+}
+
+div#logo {
+    width: 143px;
+ 	height: 70px;
+  	position: absolute;
+  	left: 195px;
+  	top: 24px;
+}
+
+div.login-btn {
+  position: absolute !important;
+  width: 114px !important;
+  left: 1022px;
+  top: 6px;
+}
+
+div.login-btn a {
+  padding: 0 20px;
+  background-color: #4d4f53;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 3px;
+  margin-right: 34px;
+  margin-top: 39px;
+  height: 37px;
+  line-height: 37px;
+  display: block;
+}
+
+div.sign-btn {
+  position: absolute !important;
+  width: 242px !important;
+  left: 771px;
+  top: 6px;
+}
+
+div.sign-btn a {
+  padding: 0 10px;
+  background-color: #54b948;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 3px;
+  margin-right: 1px;
+  margin-top: 39px;
+  height: 37px;
+  line-height: 37px;
+  display: block;
+  margin-left: 0px;
+}
+
+div.homelnk a {
+  padding: 0px 650px;
+  color: black;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 3px;
+  margin-right: 305px;
+  margin-top: 40px;
+  height: 37px;
+  line-height: 58px;
+  display: block;
+  margin-left: 0px;
+}
+
+div.sign-btn a {
+  width: 84px;
+}
+
+div.container {
+  height: 400px;
+}
+
+div.lgnlables{
+  width: 50%;
+  margin-left: 420px; 
+}
+.nameError{
+	padding-left:10px;
+	}
+.lablename{
+	padding-right: 10px;
+  margin: 8px 0px;
+  width: 90px;
+  float: left;
+  padding-left: 0px;
+  text-align: left;
+}
+.fmt{
+	padding-left: 4px;
+  	margin-left: 29px;
+}
+.sbmtbtn{
+  background-color: #54b948;
+  color: #fff;
+  margin-left: 100px;
+ }

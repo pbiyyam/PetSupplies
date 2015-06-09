@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<h4>
+<div align="left">
+	<label >Categories</label>
+	<select name="Categories" >
+		<option value="0">Dog</option>
+		<option value="1">Cat</option>
+		<option value="2">Bird</option>
+		<option value="2">Fish</option>
+	</select>
+	<br>
+	
+	<!-- <select name="Products">
+		<option value="0">Food</option>
+		<option value="1">Medicine</option>
+	</select> -->
+	<br>
+	<button class="btn btn-mini btn-danger" ng-click="fetchProducts()">Get Products</button>
+	<table class="table table-bordered table-striped" style="width:450px; margin-left: 100px;" >
+<!-- <table class="table table-bordered table-striped" style="width:450px; margin-left: 100px;" ng-show="products.length > 0"> -->
+    <thead>
+        <tr>
+            <th style="text-align: center; width: 25px;">Action</th>
+            <th style="text-align: center;">Product Name</th>
+        </tr>
+    </thead>
+    <tbody>
+    	<tr>
+    		<td  style="width:70px;text-align:center;"><button class="btn btn-mini btn-danger" ng-click="fetchProducts()">Get Products</button>
+    	</tr>
+    	<label >Products</label>
+        <tr ng-repeat="product in products">
+            <td  style="width:70px;text-align:center;"><button class="btn btn-mini btn-danger" ng-click="removeCar(car)">Remove</button></td>
+            <td>{{product}}</td>
+        </tr>
+    </tbody>
+</table>
+</div>	
+</h4>
+</body>
+</html>
