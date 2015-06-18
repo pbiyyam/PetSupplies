@@ -3,10 +3,6 @@
  */
 package com.petstore.web.dao;
 
-import java.util.List;
-
-import com.petstore.web.beans.Category;
-import com.petstore.web.beans.Product;
 import com.petstore.web.beans.RoleDetails;
 import com.petstore.web.beans.UserDetails;
 
@@ -17,18 +13,6 @@ import com.petstore.web.beans.UserDetails;
  */
 
 public interface RegistrationDao {
-	
-	/**
-	 * This method fetches all the products available from db
-	 * @return List<Product>
-	 */
-	List<Product> getProducts();
-	
-	/**
-	 * This method fetches all the categories available from db
-    * @return List<Category>
-	 */
-	List<Category> getCategories();
 
 	/**
 	 * This method checks whether the emailId entered already exits in db or not
@@ -51,7 +35,17 @@ public interface RegistrationDao {
 	 */
 	UserDetails fetchLoginDetails(String emailId);
 	
+	/**
+	 * this method fetches all available roles from database
+	 * @param roleId int
+	 * @return roles
+	 */
 	RoleDetails getRoleDetails(int roleId);
 	
+	/**
+	 * This method validates whether the provided emailid is of admin or not
+	 * @param emailId String
+	 * @return users
+	 */
 	UserDetails validateAdmin(String emailId);
 }

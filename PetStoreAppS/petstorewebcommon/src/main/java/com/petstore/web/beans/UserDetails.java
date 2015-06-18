@@ -5,6 +5,8 @@ package com.petstore.web.beans;
  */
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,7 +18,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.petstore.web.util.Commonconstants;
 
 /**
  * @author Praveena BiYYam
@@ -24,12 +29,11 @@ import javax.persistence.Table;
  */
 @Entity
 @NamedQueries({
-	@NamedQuery(name = "getUserInfo", query = " SELECT U FROM UserDetails U"),
-	@NamedQuery(name="getEmailIdCount", query="SELECT U FROM UserDetails U WHERE U.emailId = :emailId"),
-	@NamedQuery(name="getUserEmailIdPwd", query="SELECT U from UserDetails U WHERE U.emailId = :emailId"),
-	@NamedQuery(name="getAdminEmailIdPwd", query="SELECT U from UserDetails U WHERE U.emailId = :emailId AND U.roles.roleId = 2")
+	@NamedQuery(name = Commonconstants.GET_EMAILID_COUNT, query="SELECT U FROM UserDetails U WHERE U.emailId = :emailId"),
+	@NamedQuery(name = Commonconstants.GET_USER_EMAILID_PWD, query="SELECT U from UserDetails U WHERE U.emailId = :emailId"),
+	@NamedQuery(name = Commonconstants.GET_ADMIN_EMAIL_PWD, query="SELECT U from UserDetails U WHERE U.emailId = :emailId AND U.roles.roleId = 2")
 })
-@Table(name = "USER_DETAILS")
+@Table(name = Commonconstants.USER_DETAILS_ENTITY)
 public class UserDetails implements Serializable{
 
 	/**
@@ -38,9 +42,9 @@ public class UserDetails implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id 
-   @GeneratedValue(strategy=GenerationType.IDENTITY)
-   @Column(name="ID", unique=true, nullable=false)
-	private long id;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="USERID", unique=true, nullable=false)
+	private long userId;
 	
 	@Column(name = "PASSWORD")
 	private String password;
@@ -63,6 +67,9 @@ public class UserDetails implements Serializable{
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ROLEID", nullable = false)
 	private RoleDetails roles;
+	
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="users")
+	private Set<Orders> orderSet = new HashSet<Orders>(0);
 
 	
 	public RoleDetails getRoles() {
@@ -72,15 +79,6 @@ public class UserDetails implements Serializable{
 	public void setRoles(RoleDetails roles) {
 		this.roles = roles;
 	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
 	
 	public String getPassword() {
 		return password;
@@ -134,5 +132,22 @@ public class UserDetails implements Serializable{
 	public void setEmailId(String emailId) {
 		this.emailId = emailId;
 	}
+
+	public long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(long userId) {
+		this.userId = userId;
+	}
+
+	public Set<Orders> getOrderSet() {
+		return orderSet;
+	}
+
+	public void setOrderSet(Set<Orders> orderSet) {
+		this.orderSet = orderSet;
+	}
+	
 
 }

@@ -35,19 +35,22 @@ indexModule.controller('MainCtrl', function($scope, myPageCtx) {
 indexModule.config(function($routeProvider) {
 	  
 	  $routeProvider.when('/', {
-	    templateUrl: 'html/login.html'
+	    templateUrl: 'login.html',
+	    controller: 'LoginController'
 	  });
-	});	  
+});	  
 	  
 indexModule.config(['$routeProvider',
     function($routeProvider) {
         $routeProvider.
             when('/home', {
-                templateUrl: 'home.html'
-                //controller: 'HomeController'
-            }).
-            when('/login', {
-                templateUrl: 'html/login.html',
+                templateUrl: 'home.html',
+                controller: 'HomeController'
+            }).when('/login', {
+                templateUrl: 'login.html',
+                controller: 'LoginController'
+            }).when('/logout', {
+                templateUrl: 'logout.html',
                 controller: 'LoginController'
             }).when('/category', {
                 templateUrl: 'category.html',
@@ -56,10 +59,9 @@ indexModule.config(['$routeProvider',
                 templateUrl: 'product.html',
                 controller: 'ProductController'
             }).when('/', {
-                templateUrl: 'html/login.html',
+                templateUrl: 'login.html',
                 controller: 'LoginController'
-            }).
-            otherwise({
+            }).otherwise({
                 redirectTo: '/login'
             });
     }]);
@@ -98,6 +100,10 @@ indexModule.controller("LoginController",function($scope,$http,$window,$location
 	 	response1.error(function(data, status, headers, config) {
 		$scope.message = "Something went wrong. Please try after sometime";
 	});
+	};
+	
+	$scope.logout = function(){
+	    $location.path('/login');
 	};
 });
 

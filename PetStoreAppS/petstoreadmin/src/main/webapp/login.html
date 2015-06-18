@@ -6,12 +6,6 @@
 <link href="css/style.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
-<!-- <div class="alert alert-error" ng-show="loggedin">
-    {{user}}
-</div> -->
-<div class="alert alert-error" ng-show="error">
-    {{errorMessage}}
-</div>
 	<div class="container">
 	<form name="lgnForm">
 		<div align="center">
@@ -22,17 +16,17 @@
 			<br>
 		<div class="lt lgnlables">
 			<label class="lablename lt">Email:*</label> <input class="lt fmt" type="email" name="uEmail" ng-model="userEmailId" required autofocus="" placeholder="Email" >
-			<!-- <div class="lt nameError" ng-show="lgnForm.$submitted || lgnForm.uEmail.$touched">
+			<div class="lt nameError" ng-show="lgnForm.$submitted || lgnForm.uEmail.$touched">
 				<font color="red"><span ng-show="lgnForm.uEmail.$error.required">Please enter email.</span>
 				<span ng-show="lgnForm.uEmail.$error.email">Please enter a valid email.</span></font>
-			</div> -->
+			</div>
 		</div>
 <br/>
 		<div class="lt lgnlables">
 			<label class="lablename lt">Password:*</label> <input class="lt fmt" type="password" name="password" ng-model="userPassword" required placeholder="Password" >
-			<!-- <div class="lt nameError" ng-show="lgnForm.$submitted || lgnForm.password.$touched"> 
+			<div class="lt nameError" ng-show="lgnForm.$submitted || lgnForm.password.$touched"> 
       			<font color="red"><span ng-show="lgnForm.password.$error.required">Please enter password.</span></font>
-    		</div> -->
+    		</div>
     	</div>		
 		<br/>
 		<div>

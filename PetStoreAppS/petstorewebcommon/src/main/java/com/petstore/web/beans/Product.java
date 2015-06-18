@@ -4,8 +4,9 @@
 package com.petstore.web.beans;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,21 +17,24 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Proxy;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.petstore.web.util.Commonconstants;
 
 /**
  * @author pbiyyam
  *
  */
 @Entity
-@Table(name="PRODUCT_DETAILS")
+@Table(name=Commonconstants.PRODUCT_DETAILS_ENTITY)
 @NamedQueries({
-	@NamedQuery(name = "getAllProducts", query = "SELECT P from Product P"),
-	@NamedQuery(name="getProductById", query="SELECT P FROM Product P WHERE P.productId = :productId")
+	@NamedQuery(name = Commonconstants.GET_ALL_PRODUCTS, query = "SELECT P from Product P"),
+	@NamedQuery(name = Commonconstants.GET_PROD_BYID, query="SELECT P FROM Product P WHERE P.productId = :productId"),
+	@NamedQuery(name = Commonconstants.GET_PROD_BY_CAT, query = "SELECT P from Product P where P.category = :category")
 })
 @JsonIgnoreProperties(ignoreUnknown=false)
 @Proxy(lazy=false)
@@ -59,9 +63,12 @@ public class Product implements Serializable{
 	@Column(name="PRODUCTSTATUS")
 	private String productStatus;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="CATEGORYID", nullable=false)
 	private Category category;
+	
+	@OneToMany(fetch=FetchType.LAZY , mappedBy = "products")
+	private Set<Orders> prodOrders = new HashSet<Orders>(0);
 	
 	public Product(){
 		
@@ -177,6 +184,14 @@ public class Product implements Serializable{
 		return "Products [productId=" + productId + ", productName="
 				+ productName + ", productDesc=" + productDesc + ", productPrices="
 				+ productPrice + "]";
+	}
+
+	public Set<Orders> getProdOrders() {
+		return prodOrders;
+	}
+
+	public void setProdOrders(Set<Orders> prodOrders) {
+		this.prodOrders = prodOrders;
 	}
 		
 }

@@ -4,6 +4,8 @@
 package com.petstore.web.service;
 
 import java.util.List;
+
+import com.petstore.web.beans.Category;
 import com.petstore.web.beans.Product;
 
 /**
@@ -12,15 +14,48 @@ import com.petstore.web.beans.Product;
  */
 public interface ProductService {
 
-public List<Product> getAllProducts();
-	
-	public Product getProductById(int id);
-	
-	public void addProduct(Product product);
-	
-	public void deleteProductById(int id);
+	/**
+	 * This method fetches all available products from database
+	 * 
+	 * @return List<Product>
+	 */
+	List<Product> getAllProducts();
 
-    public void deleteAll();
+	/**
+	 * this method fetches all product based on id
+	 * 
+	 * @param id
+	 *            int
+	 * @return product
+	 */
+	Product getProductById(int id);
 
-    public void updateProduct(Product product);
+	/**
+	 * this method adds new product into database
+	 * 
+	 * @param product
+	 */
+	void addProduct(Product product);
+
+	/**
+	 * this method deletes selected product from database tables
+	 * 
+	 * @param id
+	 */
+	void deleteProductById(int id);
+
+	/**
+	 * this method updates existing product details
+	 * 
+	 * @param product
+	 */
+	void updateProduct(Product product);
+
+	/**
+	 * This method fetches all product based on categroy
+	 * 
+	 * @param cat
+	 * @return List<Product>
+	 */
+	List<Product> getProdByCategory(Category cat);
 }

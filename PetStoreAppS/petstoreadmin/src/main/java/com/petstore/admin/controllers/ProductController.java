@@ -19,52 +19,69 @@ import com.petstore.web.service.CategoryService;
 import com.petstore.web.service.ProductService;
 
 /**
+ * This class acts as a rest controller for processing product management requests
  * @author Praveena BiYYam
  *
  */
 @RestController
 public class ProductController {
 
-	private static final Logger LOGGER = Logger.getLogger(ProductController.class);
-	
+	private static final Logger LOGGER = Logger
+			.getLogger(ProductController.class);
+
 	@Autowired
-	ProductService productService;
-	
+	private ProductService productService;
+
 	@Autowired
-	CategoryService categoryService;
-	
+	private CategoryService categoryService;
+
+	/**
+	 * This method fetches all available products for further management
+	 * @return nList List<Product>
+	 */
 	@RequestMapping(value = { "/product.json" })
-	public @ResponseBody List<Product> getProducts(){
-	      LOGGER.debug("In ProductController:getProducts() begin");
-	      List<Product> pList = productService.getAllProducts();
-	      List<Product> nList = new ArrayList<Product>();
-	      for(Product p : pList){
-	    	  p.setCategory(null);
-	    	  nList.add(p);
-	      }
-	      return nList;
-	      //return productService.getAllProducts();
-	   }
-	
+	public @ResponseBody List<Product> getProducts() {
+		LOGGER.debug("In ProductController:getProducts() begin");
+		List<Product> pList = productService.getAllProducts();
+		List<Product> nList = new ArrayList<Product>();
+		for (Product p : pList) {
+			p.setCategory(null);
+			nList.add(p);
+		}
+		return nList;
+	}
+
+	/**
+	 * This method is used for adding a new product
+	 * @param product
+	 */
 	@RequestMapping(value = "/addProduct.htm", method = RequestMethod.POST)
-    public @ResponseBody void addProduct(@RequestBody Product product) {
+	public @ResponseBody void addProduct(@RequestBody Product product) {
 		LOGGER.debug("In ProductController:addProduct() ");
-		System.out.println("checking category id"+product.getCategory().getCategoryId());
-		product.setCategory(categoryService.getCategoryById(product.getCategory().getCategoryId()));
-        productService.addProduct(product);
-    }
-	
+		product.setCategory(categoryService.getCategoryById(product
+				.getCategory().getCategoryId()));
+		productService.addProduct(product);
+	}
+
+	/**
+	 * This method is used for updating all the existing products
+	 * @param product
+	 */
 	@RequestMapping(value = "/updateProduct.htm", method = RequestMethod.PUT)
-    public @ResponseBody void updateProduct(@RequestBody Product product) {
+	public @ResponseBody void updateProduct(@RequestBody Product product) {
 		LOGGER.debug("In ProductController:updateProduct() ");
-		product.setCategory(categoryService.getCategoryById(product.getCategory().getCategoryId()));
+		product.setCategory(categoryService.getCategoryById(product
+				.getCategory().getCategoryId()));
 		productService.updateProduct(product);
-    }
-	
+	}
+
+	/**
+	 * This method is used for removing a selected product
+	 * @param product
+	 */
 	@RequestMapping(value = "/removeProduct.htm", method = RequestMethod.POST)
-    public @ResponseBody void removeProduct(@RequestBody Product product) {
+	public @ResponseBody void removeProduct(@RequestBody Product product) {
 		LOGGER.debug("In ProductController:removeProduct() ");
-		System.out.println("categoryId value "+product.getProductId());
 		productService.deleteProductById(product.getProductId());
-    }
+	}
 }

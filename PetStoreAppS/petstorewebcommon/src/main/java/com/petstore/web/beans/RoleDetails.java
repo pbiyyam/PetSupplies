@@ -17,15 +17,17 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.petstore.web.util.Commonconstants;
+
 /**
  * @author pbiyyam
  *
  */
 @Entity
 @NamedQueries({
-	@NamedQuery(name="getRoles", query="SELECT R from RoleDetails R WHERE R.roleId = :roleId")
+	@NamedQuery(name = Commonconstants.GET_ROLES , query="SELECT R from RoleDetails R WHERE R.roleId = :roleId")
 })
-@Table(name = "ROLE_DETAILS")
+@Table(name = Commonconstants.ROLE_DETAILS_ENTITY)
 public class RoleDetails {
 	
 	@Id 

@@ -13,15 +13,40 @@ import com.petstore.web.beans.Category;
  */
 public interface CategoryService {
 
-	public List<Category> getAllCategories();
-	
-	public Category getCategoryById(int id);
-	
-	public void addCategory(Category category);
-	
-	public void deleteCategoryById(int id);
+	/**
+	 * This method fetches all available categories from database
+	 * 
+	 * @return List<Category>
+	 */
+	List<Category> getAllCategories();
 
-    public void deleteAll();
+	/**
+	 * this method fetches all categories based on id
+	 * 
+	 * @param id
+	 *            int
+	 * @return category
+	 */
+	Category getCategoryById(int id);
 
-    public void updateCategory(Category category);
+	/**
+	 * this method adds new category into database
+	 * 
+	 * @param category
+	 */
+	void addCategory(Category category);
+
+	/**
+	 * this method deletes selected category from database tables
+	 * 
+	 * @param id
+	 */
+	void deleteCategoryById(int id);
+
+	/**
+	 * this method updates existing category details
+	 * 
+	 * @param category
+	 */
+	void updateCategory(Category category);
 }

@@ -7,7 +7,6 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -22,16 +21,17 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Proxy;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.petstore.web.util.Commonconstants;
 
 /**
  * @author pbiyyam
  *
  */
 @Entity
-@Table(name="CATEGORY")
+@Table(name=Commonconstants.CATEGORY_ENTITY)
 @NamedQueries({
-	@NamedQuery(name = "getAllCategories", query = "SELECT C from Category C"),
-	@NamedQuery(name="getCategoryById", query="SELECT C FROM Category C WHERE C.categoryId = :categoryId")
+	@NamedQuery(name = Commonconstants.GET_ALL_CATEGORIES, query = "SELECT C from Category C"),
+	@NamedQuery(name=Commonconstants.GET_CATEGORY_BYID, query="SELECT C FROM Category C WHERE C.categoryId = :categoryId")
 })
 @JsonIgnoreProperties(ignoreUnknown=false)
 @Proxy(lazy=false)

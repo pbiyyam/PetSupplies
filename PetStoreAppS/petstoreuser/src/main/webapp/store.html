@@ -1,0 +1,56 @@
+<p class="text-info">
+    Welcome to the Angular Store.<br />
+    Please select the products you want and add them to your shopping cart.<br />
+    When you are done, click the shopping cart icon to review your order and check out.
+</p>
+<div class="container" align="center" ng-init="fetchCategories()">
+<div align="center" ng-show="loggedin">{{user}}</div>
+<p>
+	<label >Categories: </label>
+		<select name="Categories" id="Categories" ng-model="product.category.categoryId">
+			<option value="-1">-Select Category-</option>
+			<option ng-repeat="c in categories" value="{{c.categoryId}}" >{{c.categoryName}}</option>
+		</select>
+    	<button
+                   class="btn btn-primary"
+        	       ng-click="fetchProductByCategory(product.category.categoryId)">
+                   <i class="icon-ok icon-white" /> Get Products
+		</button>
+		<br/>
+		<br/>
+		<label >Search:</label><input ng-model="search">
+</p>
+
+<table class="table table-bordered">
+    <tr class="well">
+        <td class="tdRight" colspan="4" >
+            <a href="#/cart" title="go to shopping cart" ng-disabled="cart.getTotalCount() < 1">
+                <i class="icon-shopping-cart" />
+                <b>{{cart.getTotalCount()}}</b> items, <b>{{cart.getTotalPrice() | currency}}</b>
+            </a>
+        </td>
+    </tr>
+    <tr ng-repeat="product in products | orderBy:'name' | filter:search" >
+        <td class="tdCenter"><img ng-src="images/products/{{product.productId}}.jpg" alt="{{product.productId}}" /></td>
+        <td>
+            {{product.productName}} | {{product.productDesc}}
+        </td>
+        <td class="tdRight">
+            {{product.productPrice}}
+        </td>
+        <td class="tdCenter">
+            <a href="" ng-click="cart.addItem(product.productId, product.productName, product.productPrice, product.productDesc, 1)">
+                add to cart
+            </a>
+        </td>
+    </tr>
+    <tr class="well">
+        <td class="tdRight" colspan="4">
+            <a href="#/cart" title="go to shopping cart" ng-disabled="cart.getTotalCount() < 1">
+                <i class="icon-shopping-cart" />
+                <b>{{cart.getTotalCount()}}</b> items, <b>{{cart.getTotalPrice() | currency}}</b>
+            </a>
+        </td>
+    </tr>
+</table>
+</div>

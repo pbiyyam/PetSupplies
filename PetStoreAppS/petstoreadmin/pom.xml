@@ -8,20 +8,13 @@
 	<name>PetStoreAdmin Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 
+	<parent>
+		<groupId>com.petstore</groupId>
+		<artifactId>petstorewebparent</artifactId>
+		<version>1.0</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
 	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>2.5</version>
-			<scope>provided</scope>
-		</dependency>
 
 		<dependency>
 			<groupId>com.petstore.common</groupId>
@@ -29,11 +22,10 @@
 			<version>1.0.0</version>
 			<scope>compile</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
-			<version>1.2.16</version>
 		</dependency>
 
 	</dependencies>

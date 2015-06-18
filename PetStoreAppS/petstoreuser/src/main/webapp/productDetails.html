@@ -21,22 +21,37 @@
 	<div class="alert alert-info" ng-show="products.length == 0">No Products found</div>
 	<br>
 <table class="table table-bordered table-striped" ng-show="products.length > 0">
+
+	<tr class="well">
+        <td class="tdRight" colspan="4" >
+            <a href="#/cart" title="go to shopping cart" ng-disabled="cart.getTotalCount() < 1">
+                <i class="icon-shopping-cart" />
+                <b>{{cart.getTotalCount()}}</b> items, <b>{{cart.getTotalPrice() | currency}}</b>
+            </a>
+        </td>
+    </tr>
 	<thead>
 		<tr>
 			<th style="text-align: center; width: 25px;">Id</th>
- 			<th style="text-align: center;">Product Name</th>
-			<th style="text-align: center;">Product Description</th>
+ 			<th style="text-align: center;">Product Name | Product Desc</th>
 			<th style="text-align: center;">Product Price</th>
 			<th style="text-align: center;">Product Status</th>
+			<th></th>
 		</tr>
 	</thead>
 	<tbody>
-		<tr ng-repeat="item in products">
-			<td style="text-align: center;">{{item.productId}}</td>
-			<td>{{item.productName}}</td>
-			<td>{{item.productDesc}}</td>				
-			<td>{{item.productPrice}}</td>
-			<td>{{item.productStatus}}</td>
+		<tr ng-repeat="product in products">
+			<td style="text-align: center;">{{product.productId}}</td>
+			<img ng-src="images/products/{{product.productId}}.jpg" alt="{{product.productName}}" />
+			<td><a href="#/home/{{product.productId}}"><b>{{product.productName}}</b></a><br />
+            {{product.productDesc}}</td>				
+			<td>{{product.productPrice}}</td>
+			<td>{{product.productStatus}}</td>
+			<td class="tdCenter">
+            <a href="" ng-click="cart.addItem(product.productId, product.productName, product.productPrice, product.productDesc, 1)">
+                add to cart
+            </a>
+        </td>
 		</tr>
 	</tbody>
 </table>
